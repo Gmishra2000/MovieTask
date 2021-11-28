@@ -26,14 +26,6 @@ public class TheMain {
 		  } catch(SQLException e) {
 		    System.out.println(e.toString());
 		    // always remember to close database connections
-		  } finally {
-		    try{
-		      ps.close();
-		      con.close();
-		    } catch(SQLException e) {
-		      System.out.println(e.toString());
-		    }
-		    
-		  }
+		  } 
 		}
 }
