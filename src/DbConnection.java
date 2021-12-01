@@ -8,7 +8,7 @@ public class DbConnection {
 	    try {
 	      Class.forName("org.sqlite.JDBC");
 	      con = DriverManager.getConnection("jdbc:sqlite:movieDatabase.db"); // connecting to our database
-	      System.out.println("Connected!");
+//	      System.out.println("Connected!");
 	    } catch (ClassNotFoundException | SQLException e ) {
 	      // TODO Auto-generated catch block
 	      System.out.println(e+"");

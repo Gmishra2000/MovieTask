@@ -10,7 +10,11 @@ public class TheMain {
 //		DbConnection.connect();
 
 //		insert(" The Lord of the Rings","Elijah Wood","Angela Bassett",2003,"Peter Jackson");
-		readAllData();
+		
+//		readAllData();
+		
+		readSpecificRow(2004);
+		
 	}
 	
 	private static void insert(String movieName, String leadActor, String actressName,int yearOfRelease, String directorName) {
@@ -79,5 +83,43 @@ public class TheMain {
 	    }
 	    
 	    
+	  }
+
+	private static void readSpecificRow(int yearOfRelease) {
+	    // lets read specific row on the database
+	    Connection con = DbConnection.connect(); 
+	    PreparedStatement ps = null; 
+	    ResultSet rs = null; 
+	    try {
+	      String sql = "Select movieName, directorName from movies where yearOfRelease > ?  "; 
+	      ps = con.prepareStatement(sql); 
+	      ps.setInt(1, yearOfRelease);
+	      rs = ps.executeQuery(); 
+	      
+	      // we are reading one row, so no need to loop
+	      while(rs.next()) {
+	    	  String movieName = rs.getString("movieName"); 
+		      System.out.println("Movie Name: " +movieName);// it should give us movieName
+		      
+		      String directorName = rs.getString("directorName"); 
+		      System.out.println("Director Name: " +directorName+"\n\n");// it should give us movieName
+		      
+	      }
+	      
+	      
+	    } catch(SQLException e) {
+	      System.out.println(e.toString());
+	    } finally {
+	      // close connections
+	      try{
+	        rs.close(); 
+	        ps.close();
+	        con.close(); 
+	      } catch (SQLException e) {
+	        // TODO: handle exception
+	        System.out.println(e.toString());
+	      }
+	      
+	    }
 	  }
 }
